@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Form from 'react-bootstrap/Form';
-import {Link, NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 class Header extends React.Component {
 
@@ -15,9 +15,13 @@ class Header extends React.Component {
                     <Navbar.Brand href="/home">Photo-frames shop</Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link href="/home">Home</Nav.Link>
-                        <Nav.Link href="/photo-frames">Photo-frames</Nav.Link>
+                        <Link to="/photo-frames">Photo-frames</Link>
                         <Nav.Link href="/about">About</Nav.Link>
                         <Link to="/profile">Profile</Link>
+                        {
+                            this.props.authenticated && this.props.currentUser.role === "MAIN" ?
+                                (<Link to="/profile">Users</Link>) : (null)
+                        }
                     </Nav>
                     <Form inline>
                         {this.props.authenticated ? (

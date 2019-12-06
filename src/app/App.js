@@ -15,6 +15,9 @@ import './App.css';
 import OAuth2RedirectHandler from "../user/oauth2/OAuth2RedirectHandler";
 import Header from "../my/Header";
 import Home from "../components/Home";
+import SearchContainer from "../components/SearchContainer";
+import AppHeader from "../common/AppHeader";
+
 
 class App extends Component {
     constructor(props) {
@@ -69,14 +72,17 @@ class App extends Component {
         return (
             <div className="app">
                 <div>
-                    <Header authenticated={this.state.authenticated} onLogout={this.handleLogout}/>
+                    <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}
+                            currentUser={this.state.currentUser}/>
                 </div>
                 <div className="app-body">
                     <Switch>
                         <Route exact path="/" component={Home}/>
+                        <Route path="/home" component={Home}/>
                         <PrivateRoute path="/profile" authenticated={this.state.authenticated}
                                       currentUser={this.state.currentUser}
                                       component={Profile}/>
+                        <Route path="/photo-frames" component={SearchContainer}/>
                         <Route path="/login"
                                render={(props) => <Login authenticated={this.state.authenticated} {...props} />}/>
                         <Route path="/signup"
