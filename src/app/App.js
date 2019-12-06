@@ -70,12 +70,12 @@ class App extends Component {
         }
 
         return (
-            <div className="app">
-                <div>
+            <div>
+                <div className="container-fluid">
                     <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}
                             currentUser={this.state.currentUser}/>
                 </div>
-                <div className="app-body">
+                <div className="container-fluid">
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/home" component={Home}/>
