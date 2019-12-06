@@ -88,6 +88,7 @@ class LoginForm extends Component {
 
         login(loginRequest)
             .then(response => {
+                console.log(response);
                 localStorage.setItem(ACCESS_TOKEN, response.token);
                 Alert.success("You're successfully logged in!");
                 window.location.reload();

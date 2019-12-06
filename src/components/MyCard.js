@@ -7,14 +7,14 @@ class MyCard extends React.Component {
     render(){
         return (
             <Card style={{ width: '18rem', margin: 5 }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Img variant="top" src={this.props.elem.photoSrc} />
                 <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>{this.props.elem.name}</Card.Title>
+                    <Card.Subtitle>{this.props.elem.cost}</Card.Subtitle>
                     <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
+                        {this.props.elem.description}
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Button variant="primary" onClick={this.props.onClickHandler}>Go somewhere</Button>
                 </Card.Body>
             </Card>
         )

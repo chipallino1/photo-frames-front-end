@@ -5,7 +5,7 @@ import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
-import {getCurrentUser} from '../util/APIUtils';
+import {getCurrentUser, getItems} from '../util/APIUtils';
 import {ACCESS_TOKEN} from '../constants';
 import PrivateRoute from '../common/PrivateRoute';
 import Alert from 'react-s-alert';
