@@ -1,6 +1,6 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
-import MyCard from "./MyCard";
+import Item from "./Item";
 import {getItems} from "../util/APIUtils";
 import Button from "react-bootstrap/Button";
 
@@ -32,12 +32,9 @@ class SearchContainer extends React.Component {
 
     renderList() {
         return this.state.items.map(elem => {
-            return <MyCard elem={elem}/>
+            return <Item key={elem.id} elem={elem} authenticated={this.props.authenticated}
+                         role={this.props.currentUser != null ? this.props.currentUser.role : ""}/>
         })
-    }
-
-    newPage = (pageNum) => {
-        this.getItemsPage(pageNum);
     }
 
     render() {
@@ -49,7 +46,7 @@ class SearchContainer extends React.Component {
                         <Row>
                             {this.renderList()}
                         </Row>
-                        <Button onClick={() => (this.newPage(this.pageNum++))}>Click</Button>
+                        <Button onClick={() => (this.getItemsPage(this.pageNum++))}>Click</Button>
                     </div>
                 </div>
             </div>
