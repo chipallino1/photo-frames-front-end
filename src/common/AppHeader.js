@@ -29,14 +29,12 @@ class AppHeader extends Component {
                                             <NavLink to="/orders">Orders</NavLink>
                                         </li>
                                         {
-                                            this.props.currentUser.role === 'ADMIN' ?
+                                            this.props.currentUser.role === 'MAIN' ?
                                                 (
                                                     <li>
-                                                        <NavLink to="/createItem">Home</NavLink>
+                                                        <NavLink to="/createItem">Create item</NavLink>
                                                     </li>
-                                                ) : (
-                                                    null
-                                                )
+                                                ) : null
                                         }
 
                                         <li>

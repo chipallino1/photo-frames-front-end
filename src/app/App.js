@@ -5,7 +5,7 @@ import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
-import {getCurrentUser, getItems} from '../util/APIUtils';
+import {getCurrentUser} from '../util/APIUtils';
 import {ACCESS_TOKEN} from '../constants';
 import PrivateRoute from '../common/PrivateRoute';
 import Alert from 'react-s-alert';
@@ -13,10 +13,10 @@ import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
 import OAuth2RedirectHandler from "../user/oauth2/OAuth2RedirectHandler";
-import Header from "../my/Header";
 import Home from "../components/Home";
 import SearchContainer from "../components/SearchContainer";
 import AppHeader from "../common/AppHeader";
+import CreateItem from "../components/admin/CreateItem";
 
 
 class App extends Component {
@@ -57,6 +57,7 @@ class App extends Component {
             authenticated: false,
             currentUser: null
         });
+        window.location.reload();
         Alert.success("You're safely logged out!");
     }
 
@@ -70,19 +71,24 @@ class App extends Component {
         }
 
         return (
-            <div className="app">
-                <div>
+            <div>
+                <div className="container-fluid">
                     <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}
-                            currentUser={this.state.currentUser}/>
+                               currentUser={this.state.currentUser}/>
                 </div>
-                <div className="app-body">
+                <div className="container-fluid">
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/home" component={Home}/>
                         <PrivateRoute path="/profile" authenticated={this.state.authenticated}
                                       currentUser={this.state.currentUser}
                                       component={Profile}/>
-                        <Route path="/photo-frames" component={SearchContainer}/>
+                        <Route path="/photo-frames"
+                               render={(props) => <SearchContainer authenticated={this.state.authenticated}
+                                                                   currentUser={this.state.currentUser} {...props} />}/>
+                        <Route path="/createItem"
+                               render={(props) => <CreateItem authenticated={this.state.authenticated}
+                                                                   currentUser={this.state.currentUser} {...props} />}/>
                         <Route path="/login"
                                render={(props) => <Login authenticated={this.state.authenticated} {...props} />}/>
                         <Route path="/signup"

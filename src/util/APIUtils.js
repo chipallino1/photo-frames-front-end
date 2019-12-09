@@ -52,7 +52,7 @@ export function signup(signupRequest) {
 
 export function getItems(pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allByName?name=&pageNumber="+pageNum+"&offset=5",
+        url: API_BASE_URL + "/photo-frames/allByName?name=&pageNumber="+pageNum+"&offset=1",
         method: 'GET'
     });
 }

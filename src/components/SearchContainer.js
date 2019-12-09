@@ -1,39 +1,40 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import MyCard from "./MyCard";
+import Item from "./Item";
 import {getItems} from "../util/APIUtils";
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
 
 class SearchContainer extends React.Component {
 
+    pageNum = 1;
+
     constructor(props) {
         super(props);
-        this.state = {items: []}
+        this.state = {
+            items: [],
+            pageNum: 0
+        }
     }
 
     getItemsPage(pageNum) {
         getItems(pageNum)
             .then(response => {
-                console.log(response);
-                this.setState({items: response});
+                this.setState((state, props) => {
+                    response.map(elem => (state.items.push(elem)));
+                    return state;
+                });
             })
     }
 
     componentDidMount() {
         this.getItemsPage(0);
-        console.log(this.state);
     }
 
     renderList() {
         return this.state.items.map(elem => {
-            return <MyCard elem={elem}/>
+            return <Item key={elem.id} elem={elem} authenticated={this.props.authenticated}
+                         role={this.props.currentUser != null ? this.props.currentUser.role : ""}/>
         })
-    }
-
-    onClickHandl = () => {
-        console.log(this.state);
     }
 
     render() {
@@ -45,7 +46,7 @@ class SearchContainer extends React.Component {
                         <Row>
                             {this.renderList()}
                         </Row>
-                        <Button onClick={this.onClickHandl}>Click</Button>
+                        <Button onClick={() => (this.getItemsPage(this.pageNum++))}>Click</Button>
                     </div>
                 </div>
             </div>
