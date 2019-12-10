@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import {SketchPicker} from 'react-color';
 import DateTimePicker from 'react-datetime-picker';
+import {createItem} from "../../util/APIUtils";
 
 class CreateItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            photo: null,
+            selectedFile: null,
             name: '',
             vendorCode: '',
             borderMaterial: '',
@@ -33,6 +34,7 @@ class CreateItem extends Component {
         const target = event.target;
         const inputName = target.name;
         const inputValue = target.value;
+        console.log(inputName);
         this.setState({
             [inputName]: inputValue
         });
@@ -40,6 +42,7 @@ class CreateItem extends Component {
 
     handleSubmit = (event) => {
         let photoFramesDto = {};
+        photoFramesDto.file = this.state.selectedFile;
         photoFramesDto.name = this.state.name;
         photoFramesDto.vendorCode = this.state.vendorCode;
         photoFramesDto.borderMaterial = this.state.borderMaterial;
@@ -69,6 +72,9 @@ class CreateItem extends Component {
             });
         }
         console.log(photoFramesDto);
+        createItem(photoFramesDto).then(r => {
+            alert("Success");
+        });
     }
 
     handleAddSize = () => {
@@ -92,6 +98,10 @@ class CreateItem extends Component {
         this.setState({currentColorRgb: color.hex});
     };
 
+    handleFileChange = (event) => {
+        this.setState({selectedFile: event.target.files[0]});
+    }
+
     onChangeStartDate = date => this.setState({startDate: date})
 
     onChangeEndDate = date => this.setState({endDate: date})
@@ -101,11 +111,11 @@ class CreateItem extends Component {
             <div className="signup-container">
                 <div className="signup-content">
                     <h1 className="signup-title">Create new item here...</h1>
-                    <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+                    <form action="http://localhost:8080/photo-frames/create" method="POST" encType="multipart/form-data">
                         <div className="form-item">
-                            <input type="file" name="photo"
-                                   className="form-control" placeholder="Photo"
-                                   value={this.state.photo} onChange={this.handleInputChange} required/>
+                            <input type="file" name="file"
+                                   className="form-control" placeholder="Photo" onChange={this.handleFileChange}
+                                   required/>
                         </div>
                         <div className="form-item">
                             <input type="text" name="name"
@@ -187,7 +197,7 @@ class CreateItem extends Component {
                                             value={this.state.endDate} format="yyyy-MM-dd HH:mm"/>
                         </div>
                         <div className="form-item">
-                            <button type="button" className="btn btn-block btn-primary"
+                            <button type="submit" className="btn btn-block btn-primary"
                                     onClick={this.handleSubmit}>Create
                             </button>
                         </div>
