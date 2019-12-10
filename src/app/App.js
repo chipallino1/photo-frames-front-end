@@ -39,6 +39,8 @@ class App extends Component {
 
         getCurrentUser()
             .then(response => {
+                localStorage.setItem("userId", response.id);
+                localStorage.setItem("username", response.email);
                 this.setState({
                     currentUser: response,
                     authenticated: true,
@@ -53,6 +55,7 @@ class App extends Component {
 
     handleLogout() {
         localStorage.removeItem(ACCESS_TOKEN);
+        localStorage.removeItem("currentUser");
         this.setState({
             authenticated: false,
             currentUser: null
