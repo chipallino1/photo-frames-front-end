@@ -7,7 +7,7 @@ class Item extends React.Component {
     render() {
         return (
             <Card style={{width: '18rem', margin: 5}}>
-                <Card.Img variant="top" src={this.props.elem.photoSrc}/>
+                <Card.Img variant="top" src={this.props.elem.imageSrc}/>
                 <Card.Body>
                     <Card.Title>{this.props.elem.name}</Card.Title>
                     <Card.Subtitle>{"Cost: " + this.props.elem.cost}</Card.Subtitle>
