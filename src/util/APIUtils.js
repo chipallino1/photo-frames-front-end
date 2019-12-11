@@ -57,6 +57,13 @@ export function getItems(pageNum) {
     });
 }
 
+export function getItem(id) {
+    return request({
+        url: API_BASE_URL + "/photo-frames/" + id,
+        method: 'GET'
+    });
+}
+
 export function createItem(dto) {
     return request({
         url: API_BASE_URL + "/photo-frames/create",

@@ -46,7 +46,7 @@ class SearchContainer extends React.Component {
                         <Row>
                             {this.renderList()}
                         </Row>
-                        <Button onClick={() => (this.getItemsPage(this.pageNum++))}>Click</Button>
+                        <Button onClick={() => (this.getItemsPage(this.pageNum++))}>More</Button>
                     </div>
                 </div>
             </div>

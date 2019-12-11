@@ -2,6 +2,7 @@ import React from 'react'
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import {deleteItem} from "../util/APIUtils";
+import {Link} from "react-router-dom";
 
 class Item extends React.Component {
 
@@ -25,7 +26,7 @@ class Item extends React.Component {
                         <Card.Text>
                             {"Description: " + this.props.elem.description}
                         </Card.Text>
-                        <Button variant="primary" onClick={this.props.onClickHandler}>More</Button>
+                        <Link to={"/items/" + this.props.elem.id}>Open</Link>
                         {
                             this.props.authenticated && this.props.role === "MAIN" ?
                                 (
