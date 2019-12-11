@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Profile.css';
+import {API_BASE_URL} from "../../constants";
 
 class Profile extends Component {
     constructor(props) {
@@ -12,15 +13,7 @@ class Profile extends Component {
                 <div className="container">
                     <div className="profile-info">
                         <div className="profile-avatar">
-                            { 
-                                this.props.currentUser.imageUrl ? (
-                                    <img src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name}/>
-                                ) : (
-                                    <div className="text-avatar">
-                                        <span>{this.props.currentUser.name && this.props.currentUser.name[0]}</span>
-                                    </div>
-                                )
-                            }
+                                    <img src={API_BASE_URL + "/photo-frames/getFile/157607877836820190721_154911.jpg"} alt={this.props.currentUser.name}/>
                         </div>
                         <div className="profile-name">
                            <h2>{this.props.currentUser.name}</h2>
