@@ -1,23 +1,23 @@
 import React, {Component} from "react";
 import {SketchPicker} from 'react-color';
 import DateTimePicker from 'react-datetime-picker';
-import {createItem} from "../../util/APIUtils";
+import {API_BASE_URL} from "../../constants";
 
 class CreateItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
             selectedFile: null,
-            name: '',
-            vendorCode: '',
-            borderMaterial: '',
-            insideMaterial: '',
+            name: 'qwe',
+            vendorCode: '123',
+            borderMaterial: '123',
+            insideMaterial: '123',
             thickness: 0,
             cost: 0,
-            description: '',
-            currentSize: '',
+            description: '123',
+            currentSize: '123',
             allSizes: [],
-            currentColor: '',
+            currentColor: '123',
             allColors: [],
             currentColorRgb: '#fff',
             allColorsRgb: [],
@@ -71,10 +71,19 @@ class CreateItem extends Component {
                 rgb: this.state.allColorsRgb[i]
             });
         }
+
+        const data = new FormData();
+        data.append('file', this.state.selectedFile);
         console.log(photoFramesDto);
-        createItem(photoFramesDto).then(r => {
+        fetch(API_BASE_URL + "/photo-frames/create", {
+            method: 'POST',
+            body: data
+        }).then(r => {
             alert("Success");
-        });
+        })
+            .catch(r => {
+                console.log(r);
+            });
     }
 
     handleAddSize = () => {
@@ -111,7 +120,8 @@ class CreateItem extends Component {
             <div className="signup-container">
                 <div className="signup-content">
                     <h1 className="signup-title">Create new item here...</h1>
-                    <form action="http://localhost:8080/photo-frames/create" method="POST" encType="multipart/form-data">
+                    <form action="http://localhost:8080/photo-frames/create" method="POST"
+                          encType="multipart/form-data">
                         <div className="form-item">
                             <input type="file" name="file"
                                    className="form-control" placeholder="Photo" onChange={this.handleFileChange}
@@ -155,7 +165,7 @@ class CreateItem extends Component {
                         <div className="form-item">
                             <input type="text" name="currentSize"
                                    className="form-control" placeholder="Size"
-                                   value={this.state.currentSize} onChange={this.handleInputChange} required/>
+                                   value={this.state.currentSize} onChange={this.handleInputChange}/>
                             <div className="m-1">
                                 <button type="button" className="btn btn-outline-secondary"
                                         onClick={this.handleAddSize}>Add size
@@ -170,7 +180,7 @@ class CreateItem extends Component {
                             <SketchPicker color={this.state.currentColorRgb} onChangeComplete={this.handleColorChange}/>
                             <input type="text" name="currentColor"
                                    className="form-control" placeholder="Color name"
-                                   value={this.state.currentColor} onChange={this.handleInputChange} required/>
+                                   value={this.state.currentColor} onChange={this.handleInputChange}/>
                             <div className="m-1">
                                 <button type="button" className="btn btn-outline-secondary"
                                         onClick={this.handleAddColor}>Add color
@@ -197,8 +207,7 @@ class CreateItem extends Component {
                                             value={this.state.endDate} format="yyyy-MM-dd HH:mm"/>
                         </div>
                         <div className="form-item">
-                            <button type="submit" className="btn btn-block btn-primary"
-                                    onClick={this.handleSubmit}>Create
+                            <button type="submit" className="btn btn-block btn-primary">Create
                             </button>
                         </div>
                     </form>
