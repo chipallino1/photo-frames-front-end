@@ -64,3 +64,10 @@ export function createItem(dto) {
         body: JSON.stringify(dto)
     })
 }
+
+export function deleteItem(id) {
+    return request({
+        url: API_BASE_URL + "/photo-frames/" + id,
+        method: 'DELETE'
+    })
+}
