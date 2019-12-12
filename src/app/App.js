@@ -18,6 +18,7 @@ import SearchContainer from "../components/SearchContainer";
 import AppHeader from "../common/AppHeader";
 import CreateItem from "../components/admin/CreateItem";
 import ItemPage from "../components/ItemPage";
+import UpdateItem from "../components/UpdateItem";
 
 
 class App extends Component {
@@ -92,10 +93,13 @@ class App extends Component {
                                                                    currentUser={this.state.currentUser} {...props} />}/>
                         <Route path="/createItem"
                                render={(props) => <CreateItem authenticated={this.state.authenticated}
-                                                                   currentUser={this.state.currentUser} {...props} />}/>
+                                                              currentUser={this.state.currentUser} {...props} />}/>
+                        <Route path="/updateItem/:id"
+                               render={(props) => <UpdateItem authenticated={this.state.authenticated}
+                                                              currentUser={this.state.currentUser} {...props} />}/>
                         <Route path="/items/:id"
                                render={(props) => <ItemPage authenticated={this.state.authenticated}
-                                                              currentUser={this.state.currentUser} {...props} />}/>
+                                                            currentUser={this.state.currentUser} {...props} />}/>
                         <Route path="/login"
                                render={(props) => <Login authenticated={this.state.authenticated} {...props} />}/>
                         <Route path="/signup"

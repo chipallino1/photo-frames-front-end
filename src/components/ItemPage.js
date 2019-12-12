@@ -16,10 +16,7 @@ class ItemPage extends Component {
 
 
     componentDidMount() {
-        console.log("did");
-        console.log(this.props.match.params.id);
         getItem(this.props.match.params.id).then(r => {
-            console.log(r);
             this.setState({item: r})
         })
     }

@@ -31,8 +31,16 @@ class Item extends React.Component {
                             this.props.authenticated && this.props.role === "MAIN" ?
                                 (
                                     <div>
-                                        <hr/>
-                                        <Button variant="danger" onClick={this.delete}>Delete</Button>
+                                        <div>
+                                            <hr/>
+                                            <Button variant="danger" onClick={this.delete}>Delete</Button>
+                                        </div>
+                                        <div>
+                                            <hr/>
+                                            <Link to={"/updateItem/" + this.props.elem.id}>
+                                                <Button variant="info">Update</Button>
+                                            </Link>
+                                        </div>
                                     </div>
                                 ) : null
                         }

@@ -72,6 +72,14 @@ export function createItem(dto) {
     })
 }
 
+export function updateItem(dto) {
+    return request({
+        url: API_BASE_URL + "/photo-frames/update",
+        method: 'PUT',
+        body: JSON.stringify(dto)
+    })
+}
+
 export function deleteItem(id) {
     return request({
         url: API_BASE_URL + "/photo-frames/" + id,
