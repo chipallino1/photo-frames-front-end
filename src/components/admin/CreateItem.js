@@ -51,11 +51,14 @@ class CreateItem extends Component {
         photoFramesDto.cost = this.state.cost;
         photoFramesDto.description = this.state.description;
         photoFramesDto.userId = this.state.userId;
-        photoFramesDto.discountsDto = {
-            percentCount: this.state.discount,
-            startDate: this.state.startDate.toISOString(),
-            endDate: this.state.endDate.toISOString()
-        };
+        if (this.state.discount != null && this.state.discount > 0) {
+            photoFramesDto.discountsDto = {
+                percentCount: this.state.discount,
+                startDate: this.state.startDate.toISOString(),
+                endDate: this.state.endDate.toISOString()
+            };
+        }
+
         photoFramesDto.sizesDtos = [];
         for (let i = 0; i < this.state.allSizes.length; i++) {
             photoFramesDto.sizesDtos.push({
