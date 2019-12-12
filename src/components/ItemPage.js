@@ -52,7 +52,7 @@ class ItemPage extends Component {
                     </div>
                     <div className="form-item">
                         <h6>Inside material:</h6>
-                        <input type="number" name="insideMaterial"
+                        <input type="text" name="insideMaterial"
                                className="form-control" placeholder="Inside material"
                                value={this.state.item.insideMaterial} disabled required/>
                     </div>

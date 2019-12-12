@@ -20,7 +20,7 @@ class CreateItem extends Component {
             allSizes: [],
             currentColor: '123',
             allColors: [],
-            currentColorRgb: '#fff',
+            currentColorRgb: '#ffffff',
             allColorsRgb: [],
             discount: 0,
             startDate: new Date(),
@@ -108,6 +108,7 @@ class CreateItem extends Component {
     };
 
     handleColorChange = (color) => {
+        console.log(color);
         this.setState({currentColorRgb: color.hex});
     };
 
@@ -145,7 +146,7 @@ class CreateItem extends Component {
                                value={this.state.borderMaterial} onChange={this.handleInputChange} required/>
                     </div>
                     <div className="form-item">
-                        <input type="number" name="insideMaterial"
+                        <input type="text" name="insideMaterial"
                                className="form-control" placeholder="Inside material"
                                value={this.state.insideMaterial} onChange={this.handleInputChange} required/>
                     </div>
