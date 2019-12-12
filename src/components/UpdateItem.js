@@ -85,18 +85,14 @@ class UpdateItem extends Component {
         const target = event.target;
         const inputValue = target.value;
         this.setState({discount: inputValue});
-        if (this.state.updatedItem.discountsDto == null && this.state.discount !== 0) {
-            this.setState({
-                updatedItem: {
-                    sizesDtos: this.state.updatedItem.sizesDtos !== undefined ? this.state.updatedItem.sizesDtos : null,
-                    colorsDtos: this.state.updatedItem.colorsDtos !== undefined ? this.state.updatedItem.sizesDtos : null,
-                    discountsDto: {
-                        percentCount: this.state.discount,
-                        startDate: this.state.startDate.toISOString(),
-                        endDate: this.state.endDate.toISOString()
-                    }
-                }
-            });
+        console.log(this.state);
+        if (inputValue != 0) {
+            console.log(this.state);
+            this.state.updatedItem.discountsDto = {
+                percentCount: inputValue,
+                startDate: this.state.startDate.toISOString(),
+                endDate: this.state.endDate.toISOString()
+            }
         }
         console.log(this.state.updatedItem);
     }
@@ -119,6 +115,7 @@ class UpdateItem extends Component {
             state.currentSize = '';
             return state;
         });
+        console.log(this.state.updatedItem);
     };
 
     handleAddColor = () => {
@@ -138,6 +135,7 @@ class UpdateItem extends Component {
             state.currentColor = '';
             return state;
         });
+        console.log(this.state.updatedItem);
     };
 
     handleColorChange = (color) => {
@@ -148,7 +146,9 @@ class UpdateItem extends Component {
         this.setState({selectedFile: event.target.files[0]});
     }
 
-    onChangeStartDate = date => this.setState({startDate: date})
+    onChangeStartDate = date => {
+        console.log(date);
+        this.setState({startDate: date})}
 
     onChangeEndDate = date => this.setState({endDate: date})
 
@@ -173,8 +173,8 @@ class UpdateItem extends Component {
                 cost: r.cost,
                 description: r.description,
                 discount: r.discountsDto != null ? r.discountsDto.percentCount : 0,
-                startDate: r.discountsDto != null ? r.discountsDto.startDate : new Date(),
-                endDate: r.discountsDto != null ? r.discountsDto.endDate : new Date(),
+                startDate: r.discountsDto != null ? new Date(r.discountsDto.startDate) : new Date(),
+                endDate: r.discountsDto != null ? new Date(r.discountsDto.endDate) : new Date(),
                 allColors: allColors,
                 allSizes: allSizes
             });
