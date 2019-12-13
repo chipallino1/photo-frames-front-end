@@ -60,6 +60,8 @@ class UpdateItem extends Component {
         photoFramesDto.description = this.state.description;
         photoFramesDto.userId = this.state.userId;
         photoFramesDto.discountsDto = this.state.updatedItem.discountsDto;
+        photoFramesDto.discountsDto.startDate = this.state.startDate;
+        photoFramesDto.discountsDto.endDate = this.state.endDate;
         photoFramesDto.sizesDtos = this.state.updatedItem.sizesDtos;
         photoFramesDto.colorsDtos = this.state.updatedItem.colorsDtos;
         console.log(photoFramesDto);

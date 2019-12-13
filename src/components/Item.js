@@ -34,9 +34,7 @@ class Item extends React.Component {
                                         <div>
                                             <hr/>
                                             <Button variant="danger" onClick={this.delete}>Delete</Button>
-                                        </div>
-                                        <div>
-                                            <hr/>
+                                            <span>  </span>
                                             <Link to={"/updateItem/" + this.props.elem.id}>
                                                 <Button variant="info">Update</Button>
                                             </Link>

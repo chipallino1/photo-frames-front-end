@@ -21,7 +21,7 @@ class Signup extends Component {
         return (
             <div className="signup-container">
                 <div className="signup-content">
-                    <h1 className="signup-title">Signup with SpringSocial</h1>
+                    <h1 className="signup-title">Signup with shop</h1>
                     <SocialSignup />
                     <div className="or-separator">
                         <span className="or-text">OR</span>
@@ -105,7 +105,7 @@ class SignupForm extends Component {
                 <div className="form-item">
                     <input type="email" name="email" 
                         className="form-control" placeholder="Email"
-                        value={this.state.email} onChange={this.handleInputChange} required/>
+                        value={this.state.email}App onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
                     <input type="password" name="password" 

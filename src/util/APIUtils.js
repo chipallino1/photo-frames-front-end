@@ -64,6 +64,34 @@ export function getItem(id) {
     });
 }
 
+export function getColors() {
+    return request({
+       url: API_BASE_URL + "/colors/",
+       method: 'GET'
+    });
+}
+
+export function getSizes() {
+    return request({
+        url: API_BASE_URL + "/sizes/",
+        method: 'GET'
+    });
+}
+
+export function getItemsByColor(color, pageNum) {
+    return request({
+        url: API_BASE_URL + "/photo-frames/allByColor?color="+color+"&pageNumber="+pageNum+"&offset=1",
+        method: 'GET'
+    });
+}
+
+export function getItemsBySize(size, pageNum) {
+    return request({
+        url: API_BASE_URL + "/photo-frames/allBySize?size="+size+"&pageNumber="+pageNum+"&offset=1",
+        method: 'GET'
+    });
+}
+
 export function createItem(dto) {
     return request({
         url: API_BASE_URL + "/photo-frames/create",
