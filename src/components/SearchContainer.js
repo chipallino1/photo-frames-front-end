@@ -1,7 +1,15 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
 import Item from "./Item";
-import {getColors, getItems, getItemsByColor, getItemsBySize, getSizes} from "../util/APIUtils";
+import {
+    getColors,
+    getItems,
+    getItemsByColor,
+    getItemsByPopularity,
+    getItemsBySize,
+    getItemsWithDiscounts,
+    getSizes
+} from "../util/APIUtils";
 import Button from "react-bootstrap/Button";
 
 class SearchContainer extends React.Component {
@@ -66,9 +74,9 @@ class SearchContainer extends React.Component {
             });
     }
 
-    getItemsByColorsPage = () => {
+    getItemsByColorsPage = (pageNum) => {
         console.log(this.state.currentFilter);
-        getItemsByColor(this.state.currentFilter, this.pageNum++)
+        getItemsByColor(this.state.currentFilter, pageNum)
             .then(r => {
                 console.log(r);
                 this.setState((state, props) => {
@@ -92,9 +100,57 @@ class SearchContainer extends React.Component {
             });
     }
 
-    getItemsBySizesPage = () => {
+    getItemsBySizesPage = (pageNum) => {
         console.log(this.state.currentFilter);
-        getItemsBySize(this.state.currentFilter, this.pageNum++)
+        getItemsBySize(this.state.currentFilter, pageNum)
+            .then(r => {
+                console.log(r);
+                this.setState((state, props) => {
+                    r.map(elem => (state.items.push(elem)));
+                    return state;
+                });
+            });
+    }
+
+    handlePopularChanged = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.pageNum = 0;
+        getItemsByPopularity(this.pageNum++)
+            .then(r => {
+                this.setState({
+                    items: r
+                })
+                this.currentSearchFunc = this.getItemsByPopularityPage;
+            });
+    }
+
+    getItemsByPopularityPage = (pageNum) => {
+        getItemsByPopularity(pageNum)
+            .then(r => {
+                console.log(r);
+                this.setState((state, props) => {
+                    r.map(elem => (state.items.push(elem)));
+                    return state;
+                });
+            });
+    }
+
+    handleDiscountsChanged = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.pageNum = 0;
+        getItemsWithDiscounts(this.pageNum++)
+            .then(r => {
+                this.setState({
+                    items: r
+                })
+                this.currentSearchFunc = this.getItemsWithDiscountsPage;
+            });
+    }
+
+    getItemsWithDiscountsPage = (pageNum) => {
+        getItemsWithDiscounts(pageNum)
             .then(r => {
                 console.log(r);
                 this.setState((state, props) => {
@@ -142,18 +198,28 @@ class SearchContainer extends React.Component {
                 <div className="row">
                     <div className="col-2">
                         <h4>Filter:</h4>
+                        <hr/>
                         <div>
                             <div className="radio"><label><input type="radio" name="filter"
-                                                                 value="popular"/> Popular</label></div>
-                            <div className="radio"><label><input type="radio" name="filter" value="discount"/> Discount</label>
+                                                                 value="popular"/> Cheap</label></div>
+                            <div className="radio"><label><input type="radio" name="filter"
+                                                                 value="popular"/> Expensive</label></div>
+                            <div className="radio"><label><input type="radio" name="filter"
+                                                                 value="popular"
+                                                                 onChange={this.handlePopularChanged}/> Popular</label>
+                            </div>
+                            <div className="radio"><label><input type="radio" name="filter" value="discount"
+                                                                 onChange={this.handleDiscountsChanged}/> Discount</label>
                             </div>
                         </div>
                         <div>
-                            <h6>Colors</h6>
+                            <hr/>
+                            <h5>Colors</h5>
                             {this.renderFilterColors()}
                         </div>
                         <div>
-                            <h6>Sizes</h6>
+                            <hr/>
+                            <h5>Sizes</h5>
                             {this.renderFilterSizes()}
                         </div>
                     </div>

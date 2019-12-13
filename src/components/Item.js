@@ -26,7 +26,7 @@ class Item extends React.Component {
                         <Card.Text>
                             {"Description: " + this.props.elem.description}
                         </Card.Text>
-                        <Link to={"/items/" + this.props.elem.id}>Open</Link>
+                        <Link to={"/items/" + this.props.elem.id} target="_blank">Open</Link>
                         {
                             this.props.authenticated && this.props.role === "MAIN" ?
                                 (

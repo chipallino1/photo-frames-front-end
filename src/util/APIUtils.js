@@ -92,6 +92,20 @@ export function getItemsBySize(size, pageNum) {
     });
 }
 
+export function getItemsByPopularity(pageNum) {
+    return request({
+        url: API_BASE_URL + "/photo-frames/allByNameOrderPopular?name=&pageNumber="+pageNum+"&offset=1",
+        method: 'GET'
+    });
+}
+
+export function getItemsWithDiscounts(pageNum) {
+    return request({
+        url: API_BASE_URL + "/photo-frames/allWithDiscounts?name=&pageNumber="+pageNum+"&offset=1",
+        method: 'GET'
+    });
+}
+
 export function createItem(dto) {
     return request({
         url: API_BASE_URL + "/photo-frames/create",
