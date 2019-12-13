@@ -150,3 +150,11 @@ export function createOrder(dto) {
         body: JSON.stringify(dto)
     })
 }
+
+export function sendEmailAboutNewOrder(dto) {
+    return request({
+        url: API_BASE_URL + "/mail/sendOrderCreated",
+        method: 'POST',
+        body: JSON.stringify(dto)
+    })
+}

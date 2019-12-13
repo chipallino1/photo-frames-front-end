@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import DateTimePicker from 'react-datetime-picker';
-import {createOrder, getItem} from "../util/APIUtils";
+import {createOrder, getItem, sendEmailAboutNewOrder} from "../util/APIUtils";
+import {API_BASE_URL} from "../constants";
 
 class ItemPage extends Component {
     constructor(props) {
@@ -28,10 +29,25 @@ class ItemPage extends Component {
             ordersDto.totalCost = this.state.item.cost;
         }
         ordersDto.color = this.state.currentColor;
-        ordersDto.size = this.state.currentSize;
+        ordersDto.format = this.state.currentSize;
+        ordersDto.orderDate = new Date().toISOString();
         createOrder(ordersDto).then(r => {
             console.log(r);
-            alert("Order created!")
+            alert("Order created!");
+            let mailDto = {};
+            mailDto.subject = 'Order created';
+            mailDto.message = "Order id: " + r.id + "\n" +
+                "User id: " + r.userId + "\n" +
+                "Photo frame id: " + r.photoFrameId + "\n" +
+                "Total cost: " + r.totalCost + "\n" +
+                "Size: " + r.format + "\n" +
+                "Color: " + r.color + "\n" +
+                "Order date: " + r.orderDate + "\n" +
+                "\n\n\n" +
+                "Confirm order: " + API_BASE_URL + "/mail/mailConfirm?orderId=" + r.id + "&userId=" + r.userId;
+            sendEmailAboutNewOrder(mailDto).then(r => {
+                alert(r);
+            })
         })
     }
 
