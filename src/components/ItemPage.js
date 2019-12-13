@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import DateTimePicker from 'react-datetime-picker';
-import {getItem} from "../util/APIUtils";
+import {createOrder, getItem} from "../util/APIUtils";
 
 class ItemPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentColor: '',
+            currentSize: '',
             item: {
                 sizesDtos: [],
                 colorsDtos: [],
@@ -14,6 +16,40 @@ class ItemPage extends Component {
         };
     }
 
+
+    handleSubmit = () => {
+        let ordersDto = {};
+        ordersDto.userId = localStorage.getItem("userId");
+        ordersDto.photoFrameId = this.state.item.id;
+        ordersDto.orderStatus = 'in progress';
+        if (this.state.item.discountsDto !== null && this.state.item.discountsDto !== undefined && this.state.item.discountsDto !== 0) {
+            ordersDto.totalCost = this.state.item.cost * (1 - this.state.item.discountsDto.percentCount / 100);
+        } else {
+            ordersDto.totalCost = this.state.item.cost;
+        }
+        ordersDto.color = this.state.currentColor;
+        ordersDto.size = this.state.currentSize;
+        createOrder(ordersDto).then(r => {
+            console.log(r);
+            alert("Order created!")
+        })
+    }
+
+    handleSizeChanged = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState({
+            currentSize: inputValue
+        });
+    }
+
+    handleColorChanged = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState({
+            currentColor: inputValue
+        });
+    }
 
     componentDidMount() {
         getItem(this.props.match.params.id).then(r => {
@@ -81,7 +117,7 @@ class ItemPage extends Component {
                                 this.state.item.sizesDtos.map(elem => {
                                     return <div>
                                         <input type="radio" name="sizes" placeholder="Sizes"
-                                               value={elem.format} required/>
+                                               value={elem.format} onChange={this.handleSizeChanged} required/>
                                         <label>{elem.format}</label>
                                     </div>
                                 })
@@ -96,7 +132,7 @@ class ItemPage extends Component {
                                 this.state.item.colorsDtos.map(elem => {
                                     return <div>
                                         <input type="radio" name="colors" placeholder="Sizes"
-                                               value={elem.name} required/>
+                                               value={elem.name} onChange={this.handleColorChanged} required/>
                                         <label style={{color: elem.rgb}}>{elem.name}</label>
                                     </div>
                                 })
@@ -128,11 +164,15 @@ class ItemPage extends Component {
                                 </div>
                             ) : null
                     }
+                    {
+                        this.props.currentUser != null && this.props.currentUser.role === "USER" ?
+                            (<div className="form-item">
+                                <button type="button" className="btn btn-block btn-primary"
+                                        onClick={this.handleSubmit}>Create order
+                                </button>
+                            </div>) : null
+                    }
 
-                    <div className="form-item">
-                        <button type="button" className="btn btn-block btn-primary" onClick={this.handleSubmit}>Create
-                        </button>
-                    </div>
                 </div>
             </div>
 

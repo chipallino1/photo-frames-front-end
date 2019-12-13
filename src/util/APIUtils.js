@@ -142,3 +142,11 @@ export function deleteItem(id) {
         method: 'DELETE'
     })
 }
+
+export function createOrder(dto) {
+    return request({
+        url: API_BASE_URL + "/orders/create",
+        method: 'POST',
+        body: JSON.stringify(dto)
+    })
+}
