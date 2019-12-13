@@ -106,6 +106,20 @@ export function getItemsWithDiscounts(pageNum) {
     });
 }
 
+export function getItemsCost(pageNum) {
+    return request({
+        url: API_BASE_URL + "/photo-frames/allOrderByCost?name=&pageNumber=" + pageNum + "&offset=1",
+        method: 'GET'
+    });
+}
+
+export function getItemsCostDesc(pageNum) {
+    return request({
+        url: API_BASE_URL + "/photo-frames/allOrderByCostDesc?name=&pageNumber=" + pageNum + "&offset=1",
+        method: 'GET'
+    });
+}
+
 export function createItem(dto) {
     return request({
         url: API_BASE_URL + "/photo-frames/create",

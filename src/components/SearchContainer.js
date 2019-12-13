@@ -7,6 +7,8 @@ import {
     getItemsByColor,
     getItemsByPopularity,
     getItemsBySize,
+    getItemsCost,
+    getItemsCostDesc,
     getItemsWithDiscounts,
     getSizes
 } from "../util/APIUtils";
@@ -160,6 +162,54 @@ class SearchContainer extends React.Component {
             });
     }
 
+    handleCostDescChanged = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.pageNum = 0;
+        getItemsCostDesc(this.pageNum++)
+            .then(r => {
+                this.setState({
+                    items: r
+                })
+                this.currentSearchFunc = this.getItemsCostDescPage;
+            });
+    }
+
+    getItemsCostDescPage = (pageNum) => {
+        getItemsCostDesc(pageNum)
+            .then(r => {
+                console.log(r);
+                this.setState((state, props) => {
+                    r.map(elem => (state.items.push(elem)));
+                    return state;
+                });
+            });
+    }
+
+    handleCostChanged = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.pageNum = 0;
+        getItemsCost(this.pageNum++)
+            .then(r => {
+                this.setState({
+                    items: r
+                })
+                this.currentSearchFunc = this.getItemsCostPage;
+            });
+    }
+
+    getItemsCostPage = (pageNum) => {
+        getItemsCost(pageNum)
+            .then(r => {
+                console.log(r);
+                this.setState((state, props) => {
+                    r.map(elem => (state.items.push(elem)));
+                    return state;
+                });
+            });
+    }
+
     componentDidMount() {
         this.getAllColors();
         this.getAllSizes();
@@ -201,9 +251,12 @@ class SearchContainer extends React.Component {
                         <hr/>
                         <div>
                             <div className="radio"><label><input type="radio" name="filter"
-                                                                 value="popular"/> Cheap</label></div>
+                                                                 value="popular"
+                                                                 onChange={this.handleCostChanged}/> Cheap</label></div>
                             <div className="radio"><label><input type="radio" name="filter"
-                                                                 value="popular"/> Expensive</label></div>
+                                                                 value="popular"
+                                                                 onChange={this.handleCostDescChanged}/> Expensive</label>
+                            </div>
                             <div className="radio"><label><input type="radio" name="filter"
                                                                  value="popular"
                                                                  onChange={this.handlePopularChanged}/> Popular</label>
