@@ -85,9 +85,22 @@ class SearchContainer extends React.Component {
         getItemsBySize(inputValue, this.pageNum++)
             .then(r => {
                 this.setState({
-                    currentFiler: inputValue,
+                    currentFilter: inputValue,
                     items: r
                 })
+                this.currentSearchFunc = this.getItemsBySizesPage;
+            });
+    }
+
+    getItemsBySizesPage = () => {
+        console.log(this.state.currentFilter);
+        getItemsBySize(this.state.currentFilter, this.pageNum++)
+            .then(r => {
+                console.log(r);
+                this.setState((state, props) => {
+                    r.map(elem => (state.items.push(elem)));
+                    return state;
+                });
             });
     }
 
