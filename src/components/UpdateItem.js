@@ -33,7 +33,11 @@ class UpdateItem extends Component {
                 colorsDtos: [],
                 discountsDto: {}
             },
-            updatedItem: {}
+            updatedItem: {
+                sizesDtos: null,
+                colorsDtos: null,
+                discountsDto: null
+            }
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,8 +64,6 @@ class UpdateItem extends Component {
         photoFramesDto.description = this.state.description;
         photoFramesDto.userId = this.state.userId;
         photoFramesDto.discountsDto = this.state.updatedItem.discountsDto;
-        photoFramesDto.discountsDto.startDate = this.state.startDate;
-        photoFramesDto.discountsDto.endDate = this.state.endDate;
         photoFramesDto.sizesDtos = this.state.updatedItem.sizesDtos;
         photoFramesDto.colorsDtos = this.state.updatedItem.colorsDtos;
         console.log(photoFramesDto);
@@ -150,7 +152,8 @@ class UpdateItem extends Component {
 
     onChangeStartDate = date => {
         console.log(date);
-        this.setState({startDate: date})}
+        this.setState({startDate: date})
+    }
 
     onChangeEndDate = date => this.setState({endDate: date})
 

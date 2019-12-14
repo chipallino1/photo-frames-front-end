@@ -87,6 +87,8 @@ class CreateItem extends Component {
             }).catch(r => {
                 alert(r);
             });
+        }).catch(r=>{
+            alert("Please fill fields right!");
         })
     }
 

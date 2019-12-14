@@ -85,9 +85,6 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/home" component={Home}/>
-                        <PrivateRoute path="/profile" authenticated={this.state.authenticated}
-                                      currentUser={this.state.currentUser}
-                                      component={Profile}/>
                         <Route path="/photo-frames"
                                render={(props) => <SearchContainer authenticated={this.state.authenticated}
                                                                    currentUser={this.state.currentUser} {...props} />}/>

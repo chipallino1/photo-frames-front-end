@@ -10,23 +10,17 @@ class AppHeader extends Component {
                 <header className="app-header">
                     <div className="container">
                         <div className="app-branding">
-                            <Link to="/" className="app-title">Shop</Link>
+                            <Link to="/" className="app-title">Photo frames shop</Link>
                         </div>
                         <div className="app-options">
                             <nav className="app-nav">
                                 {this.props.authenticated ? (
                                     <ul>
                                         <li>
-                                            <NavLink to="/profile">Profile</NavLink>
-                                        </li>
-                                        <li>
                                             <NavLink to="/Home">Home</NavLink>
                                         </li>
                                         <li>
                                             <NavLink to="/photo-frames">Items</NavLink>
-                                        </li>
-                                        <li>
-                                            <NavLink to="/orders">Orders</NavLink>
                                         </li>
                                         {
                                             this.props.currentUser.role === 'MAIN' ?

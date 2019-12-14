@@ -1,51 +1,49 @@
 import Carousel from "react-bootstrap/Carousel";
 import React from "react";
-import Button from "react-bootstrap/Button";
-import item1 from "../img/cranked.png"
-import item2 from "../img/kubik.jpg"
-import item3 from "../img/saint-kanye.jpg"
+import item1 from "../img/maga.jpg"
+import item2 from "../img/maga2.jpg"
+import item3 from "../img/maga4.jpg"
 
 function ControlledCarousel() {
 
     return (
-            <Carousel>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        alt="First slide"
-                        src={item1}
-                    />
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                        <Button variant="info">More</Button>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src={item2}
-                        alt="Third slide"
-                    />
+        <Carousel>
+            <Carousel.Item>
+                <img
+                    className="d-block w-100"
+                    alt="First slide"
+                    src={item1}
+                />
+                <Carousel.Caption>
+                    <h3>Online shop is the best place to choose what you want</h3>
+                    <p>You can choose what you want and in few clicks order it.</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                    className="d-block w-100"
+                    src={item2}
+                    alt="Third slide"
+                />
 
-                    <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>f
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="d-block w-100"
-                        src={item3}
-                        alt="Third slide"
-                    />
+                <Carousel.Caption>
+                    <h3><p style={{color: '#000000'}}>Look at this cute picture!</p></h3>
+                    <p style={{color: '#000000'}}>Save best moments of your life in out photo frames.</p>
+                </Carousel.Caption>f
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                    className="d-block w-100"
+                    src={item3}
+                    alt="Third slide"
+                />
 
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
+                <Carousel.Caption>
+                    <h3><p style={{color: '#000000'}}>Different format and colors</p></h3>
+                    <p style={{color: '#000000'}}>There are a lot photo frames, you will find what fits you.</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+        </Carousel>
 
     );
 }
