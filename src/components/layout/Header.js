@@ -21,7 +21,7 @@ class Header extends Component {
                         <NavLink to="#catalog">
                             <NavDropdown title="Каталог" id="collasible-nav-dropdown">
                                 <NavDropdown.Item>
-                                    <NavLink to="/all">Все</NavLink>
+                                    <NavLink to="/photo-frames">Все</NavLink>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item>
                                     <NavLink to="/a4">А4</NavLink>

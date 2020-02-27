@@ -1,5 +1,4 @@
 import React from "react";
-import Row from "react-bootstrap/Row";
 import Item from "./Item";
 import {
     getColors,
@@ -13,6 +12,10 @@ import {
     getSizes
 } from "../util/APIUtils";
 import Button from "react-bootstrap/Button";
+import {Divider} from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import {Card} from "react-bootstrap";
 
 class SearchContainer extends React.Component {
 
@@ -236,7 +239,8 @@ class SearchContainer extends React.Component {
     renderFilterSizes() {
         return this.state.sizes.map(elem => {
             return <div className="radio">
-                <label><input type="radio" name="filter" value={elem} onChange={this.handleSizeFilterChanged}/> {elem}
+                <label>
+                    <input type="radio" name="filter" value={elem} onChange={this.handleSizeFilterChanged}/> {elem}
                 </label>
             </div>
         });
@@ -246,43 +250,239 @@ class SearchContainer extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-2">
-                        <h4>Filter:</h4>
-                        <hr/>
+                    <div className="col-lg-3">
                         <div>
-                            <div className="radio"><label><input type="radio" name="filter"
-                                                                 value="popular"
-                                                                 onChange={this.handleCostChanged}/> Cheap</label></div>
-                            <div className="radio"><label><input type="radio" name="filter"
-                                                                 value="popular"
-                                                                 onChange={this.handleCostDescChanged}/> Expensive</label>
-                            </div>
-                            <div className="radio"><label><input type="radio" name="filter"
-                                                                 value="popular"
-                                                                 onChange={this.handlePopularChanged}/> Popular</label>
-                            </div>
-                            <div className="radio"><label><input type="radio" name="filter" value="discount"
-                                                                 onChange={this.handleDiscountsChanged}/> Discount</label>
+                            <h5>Цвета:</h5>
+                            <div className="container marketing">
+                                {this.renderFilterSizes()}
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
                             </div>
                         </div>
+                        <Divider/>
                         <div>
-                            <hr/>
-                            <h5>Colors</h5>
-                            {this.renderFilterColors()}
+                            <h5>Размеры: </h5>
+                            <div className="container marketing">
+                                {this.renderFilterSizes()}
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                            </div>
+
                         </div>
+                        <Divider/>
                         <div>
-                            <hr/>
-                            <h5>Sizes</h5>
-                            {this.renderFilterSizes()}
+                            <h5>Материал: </h5>
+                            <div className="container marketing">
+                                {this.renderFilterSizes()}
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            value="checkedB"
+                                            color="primary"
+                                        />
+                                    }
+                                    label="Primary"
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="col">
-                        <Row>
+                    <div className="col-lg-9">
+                        <div className="row">
                             {this.renderList()}
-                        </Row>
+
+                            <Card style={{width: '18rem'}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src=""/>
+                                    <Card.Title>Card Title</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the bulk of
+                                        the card's content.
+                                    </Card.Text>
+                                    <Card.Link href="#">Card Link</Card.Link>
+                                    <Card.Link href="#">Another Link</Card.Link>
+                                </Card.Body>
+                            </Card>
+                            <Card style={{width: '18rem'}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src=""/>
+                                    <Card.Title>Card Title</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the bulk of
+                                        the card's content.
+                                    </Card.Text>
+                                    <Card.Link href="#">Card Link</Card.Link>
+                                    <Card.Link href="#">Another Link</Card.Link>
+                                </Card.Body>
+                            </Card>
+                            <Card style={{width: '18rem'}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src=""/>
+                                    <Card.Title>Card Title</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the bulk of
+                                        the card's content.
+                                    </Card.Text>
+                                    <Card.Link href="#">Card Link</Card.Link>
+                                    <Card.Link href="#">Another Link</Card.Link>
+                                </Card.Body>
+                            </Card>
+                            <Card style={{width: '18rem'}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src=""/>
+                                    <Card.Title>Card Title</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the bulk of
+                                        the card's content.
+                                    </Card.Text>
+                                    <Card.Link href="#">Card Link</Card.Link>
+                                    <Card.Link href="#">Another Link</Card.Link>
+                                </Card.Body>
+                            </Card>
+                            <Card style={{width: '18rem'}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src=""/>
+                                    <Card.Title>Card Title</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the bulk of
+                                        the card's content.
+                                    </Card.Text>
+                                    <Card.Link href="#">Card Link</Card.Link>
+                                    <Card.Link href="#">Another Link</Card.Link>
+                                </Card.Body>
+                            </Card>
+                            <Card style={{width: '18rem'}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src=""/>
+                                    <Card.Title>Card Title</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the bulk of
+                                        the card's content.
+                                    </Card.Text>
+                                    <Card.Link href="#">Card Link</Card.Link>
+                                    <Card.Link href="#">Another Link</Card.Link>
+                                </Card.Body>
+                            </Card>
+                            <Card style={{width: '18rem'}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src=""/>
+                                    <Card.Title>Card Title</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Text>
+                                        Some quick example text to build on the card title and make up the bulk of
+                                        the card's content.
+                                    </Card.Text>
+                                    <Card.Link href="#">Card Link</Card.Link>
+                                    <Card.Link href="#">Another Link</Card.Link>
+                                </Card.Body>
+                            </Card>
+
+                        </div>
+
                         <Button onClick={() => (this.currentSearchFunc(this.pageNum++))}>More</Button>
                     </div>
                 </div>
+
             </div>
         );
     }

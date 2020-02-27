@@ -17,7 +17,7 @@ function Home() {
                     <div className="container marketing">
                         <div className="row">
                             <div className="col-lg-4">
-                                <Image src={item1} fluid="true" width="300" height="300" roundedCircle/>
+                                <Image src={item1} fluid="true" width="200" height="200" roundedCircle/>
                             </div>
                             <div className="col-lg-8" style={{margin: "auto"}}>
                                 <h2>Mail</h2>
@@ -33,7 +33,7 @@ function Home() {
                     <div className="container marketing">
                         <div className="row">
                             <div className="col-lg-4">
-                                <Image src={item2} fluid="true" width="300" height="300" roundedCircle/>
+                                <Image src={item2} fluid="true" width="200" height="200" roundedCircle/>
                             </div>
                             <div className="col-lg-8" style={{margin: "auto"}}>
                                 <h2>Mail</h2>
@@ -49,7 +49,7 @@ function Home() {
                     <div className="container marketing">
                         <div className="row">
                             <div className="col-lg-4">
-                                <Image src={item3} fluid="true" width="300" height="300" roundedCircle/>
+                                <Image src={item3} fluid="true" width="200" height="200" roundedCircle/>
                             </div>
                             <div className="col-lg-8" style={{margin: "auto"}}>
                                 <h2>Mail</h2>
