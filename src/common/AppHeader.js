@@ -23,7 +23,7 @@ class AppHeader extends Component {
                                             <NavLink to="/photo-frames">Items</NavLink>
                                         </li>
                                         {
-                                            this.props.currentUser.role === 'MAIN' ?
+                                            this.props.currentUser.roles.includes('ADMIN') ?
                                                 (
                                                     <li>
                                                         <NavLink to="/createItem">Create item</NavLink>

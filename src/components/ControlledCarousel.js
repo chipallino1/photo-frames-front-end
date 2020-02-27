@@ -29,7 +29,7 @@ function ControlledCarousel() {
                 <Carousel.Caption>
                     <h3><p style={{color: '#000000'}}>Look at this cute picture!</p></h3>
                     <p style={{color: '#000000'}}>Save best moments of your life in out photo frames.</p>
-                </Carousel.Caption>f
+                </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img

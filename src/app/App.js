@@ -2,12 +2,10 @@ import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
-import Profile from '../user/profile/Profile';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
 import {getCurrentUser} from '../util/APIUtils';
 import {ACCESS_TOKEN} from '../constants';
-import PrivateRoute from '../common/PrivateRoute';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
@@ -15,10 +13,11 @@ import './App.css';
 import OAuth2RedirectHandler from "../user/oauth2/OAuth2RedirectHandler";
 import Home from "../components/Home";
 import SearchContainer from "../components/SearchContainer";
-import AppHeader from "../common/AppHeader";
 import CreateItem from "../components/admin/CreateItem";
 import ItemPage from "../components/ItemPage";
 import UpdateItem from "../components/UpdateItem";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
 
 class App extends Component {
@@ -41,6 +40,8 @@ class App extends Component {
 
         getCurrentUser()
             .then(response => {
+                console.log(response);
+                console.log(response.roles.includes('ADMIN'));
                 localStorage.setItem("userId", response.id);
                 localStorage.setItem("username", response.email);
                 this.setState({
@@ -77,11 +78,10 @@ class App extends Component {
 
         return (
             <div>
-                <div className="container-fluid">
-                    <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout}
-                               currentUser={this.state.currentUser}/>
-                </div>
-                <div className="container-fluid">
+                <Header authenticated={this.state.authenticated} onLogout={this.handleLogout}
+                        currentUser={this.state.currentUser}/>
+
+                <div>
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/home" component={Home}/>
@@ -105,6 +105,7 @@ class App extends Component {
                         <Route component={NotFound}/>
                     </Switch>
                 </div>
+                <Footer/>
             </div>
         );
     }
