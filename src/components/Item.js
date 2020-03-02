@@ -17,31 +17,18 @@ class Item extends React.Component {
 
     render() {
         return (
-            <div id={this.props.elem.id + "photoFrame"}>
-                <Card style={{width: '18rem', margin: 5}}>
-                    <Card.Img variant="top" src={this.props.elem.imageSrc}/>
+            <div id={ "photoFrame"} style={{margin: '1%'}}>
+                <Card style={{width: '16rem'}}>
                     <Card.Body>
-                        <Card.Title>{this.props.elem.name}</Card.Title>
-                        <Card.Subtitle>{"Cost: " + this.props.elem.cost}</Card.Subtitle>
+                        <Card.Img variant="top" src=""/>
+                        <Card.Title>Card Title</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
                         <Card.Text>
-                            {"Description: " + this.props.elem.description}
+                            Some quick example text to build on the card title and make up the bulk of
+                            the card's content.
                         </Card.Text>
-                        <Link to={"/items/" + this.props.elem.id} target="_blank">Open</Link>
-                        {
-                            this.props.authenticated && this.props.role === "MAIN" ?
-                                (
-                                    <div>
-                                        <div>
-                                            <hr/>
-                                            <Button variant="danger" onClick={this.delete}>Delete</Button>
-                                            <span>  </span>
-                                            <Link to={"/updateItem/" + this.props.elem.id}>
-                                                <Button variant="info">Update</Button>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                ) : null
-                        }
+                        <Card.Link href="/itemOverview">Card Link</Card.Link>
+                        <Card.Link href="#">Another Link</Card.Link>
                     </Card.Body>
                 </Card>
             </div>

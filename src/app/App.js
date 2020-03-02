@@ -18,6 +18,7 @@ import ItemPage from "../components/ItemPage";
 import UpdateItem from "../components/UpdateItem";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
+import ItemOverview from "../components/pages/ItemOverview";
 
 
 class App extends Component {
@@ -97,6 +98,7 @@ class App extends Component {
                         <Route path="/items/:id"
                                render={(props) => <ItemPage authenticated={this.state.authenticated}
                                                             currentUser={this.state.currentUser} {...props} />}/>
+                        <Route path="/itemOverview" render={(props) => <ItemOverview/>}/>
                         <Route path="/login"
                                render={(props) => <Login authenticated={this.state.authenticated} {...props} />}/>
                         <Route path="/signup"
