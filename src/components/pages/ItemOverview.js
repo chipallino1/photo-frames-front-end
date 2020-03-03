@@ -6,7 +6,6 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import {makeStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -44,7 +43,7 @@ class ItemOverview extends React.Component {
                             <h2>Photo frame name</h2>
                             <h4>Стоимость: 300 BYN</h4>
                             <h4>Материал: Дерево</h4>
-                            <FormControl style={{margin:'1%', minWidth:150}}>
+                            <FormControl style={{margin: '1%', minWidth: 150}}>
                                 <InputLabel id="demo-simple-select-label">Цвет</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
@@ -55,7 +54,7 @@ class ItemOverview extends React.Component {
                                     <MenuItem value={30}>Thirty</MenuItem>
                                 </Select>
                             </FormControl>
-                            <FormControl style={{margin:'1%', minWidth:150}}>
+                            <FormControl style={{margin: '1%', minWidth: 150}}>
                                 <InputLabel id="demo-simple-select-label">Размер</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
@@ -68,7 +67,8 @@ class ItemOverview extends React.Component {
                             </FormControl>
                             <Typography variant="body1" gutterBottom>
                                 body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-                                unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
+                                unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate
+                                numquam
                                 dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
                             </Typography>
                         </Paper>
@@ -79,9 +79,9 @@ class ItemOverview extends React.Component {
                             <Typography variant="subtitle1" gutterBottom>
                                 Просто укажите свой эмэйл и телефон нажмите кнопку узнать и мы сообщим вам о наличии!
                             </Typography>
-                            <TextField id="standard-basic" label="Телефон" style={{margin:'1%'}}/>
-                            <TextField id="standard-basic" label="Email" style={{margin:'1%'}}/>
-                            <Button variant="contained" color="primary" style={{margin:'1%'}}>
+                            <TextField id="standard-basic" label="Телефон" style={{margin: '1%'}}/>
+                            <TextField id="standard-basic" label="Email" style={{margin: '1%'}}/>
+                            <Button variant="contained" color="primary" style={{margin: '1%'}}>
                                 Узнать о наличии!
                             </Button>
                         </Paper>

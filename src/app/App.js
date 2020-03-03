@@ -13,12 +13,12 @@ import './App.css';
 import OAuth2RedirectHandler from "../user/oauth2/OAuth2RedirectHandler";
 import Home from "../components/Home";
 import SearchContainer from "../components/SearchContainer";
-import CreateItem from "../components/admin/CreateItem";
 import ItemPage from "../components/ItemPage";
 import UpdateItem from "../components/UpdateItem";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import ItemOverview from "../components/pages/ItemOverview";
+import CreateItem from "../components/pages/CreateItem";
 
 
 class App extends Component {
