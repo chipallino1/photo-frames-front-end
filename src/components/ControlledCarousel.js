@@ -1,8 +1,8 @@
 import Carousel from "react-bootstrap/Carousel";
 import React from "react";
-import item1 from "../img/maga.jpg"
-import item2 from "../img/maga2.jpg"
-import item3 from "../img/maga4.jpg"
+import item1 from "../img/kubik.jpg"
+import item2 from "../img/saint-kanye.jpg"
+import item3 from "../img/svetlo.jpg"
 
 function ControlledCarousel() {
 
