@@ -30,7 +30,6 @@ class CreateItem extends React.Component {
     }
 
     handleCostChange(event, index) {
-        console.log('cost changed');
         const target = event.target;
         const inputValue = target.value;
         this.setState((state) => {
@@ -38,12 +37,48 @@ class CreateItem extends React.Component {
         });
     }
 
+    handleColorChange(event, index) {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState((state) => {
+            state.item.commonDtos[index].colorsDto.name = inputValue;
+        });
+    }
+
+    handleSizeChange(event, index) {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState((state) => {
+            state.item.commonDtos[index].sizesDto.format = inputValue;
+        });
+    }
+
+    handlePhotoChange(event, index) {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState((state) => {
+            state.item.commonDtos[index].photoSrc = inputValue;
+        });
+    }
+
     renderFrameOptions() {
         console.log('render');
         return this.state.item.commonDtos.map((elem, index) => {
-            return <FrameOption key={index} handleCostChange={(event) => {
-                this.handleCostChange(event, index)
-            }}/>
+            return <FrameOption key={index}
+                                handleCostChange={(event) => {
+                                    this.handleCostChange(event, index)
+                                }}
+                                handleSizeChange={(event) => {
+                                    this.handleSizeChange(event, index)
+                                }}
+                                handleColorChange={(event) => {
+                                    this.handleColorChange(event, index)
+                                }}
+                                handlePhotoChange={(event) => {
+                                    this.handlePhotoChange(event, index)
+                                }}
+
+            />
         });
     }
 

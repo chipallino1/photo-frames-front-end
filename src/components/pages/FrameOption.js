@@ -12,10 +12,10 @@ class FrameOption extends React.Component {
     render() {
         return <div className="w-50 mx-auto">
             <div className="row">
-                <TextField id="standard-basic" label="Размер"/>
+                <TextField id="standard-basic" label="Размер" onChange={this.props.handleSizeChange}/>
             </div>
             <div className="row">
-                <TextField id="standard-basic" label="Цвет"/>
+                <TextField id="standard-basic" label="Цвет" onChange={this.props.handleColorChange}/>
             </div>
             <div className="row">
                 <TextField id="standard-basic" label="Цена" onChange={this.props.handleCostChange}/>
@@ -30,6 +30,7 @@ class FrameOption extends React.Component {
                     <input
                         type="file"
                         style={{display: "none"}}
+                        onChange={this.props.handlePhotoChange}
                     />
                 </Button>
             </div>
