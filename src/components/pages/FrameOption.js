@@ -77,7 +77,10 @@ class FrameOption extends React.Component {
                     variant="contained"
                     component="label"
                     style={this.state.photoButtonDeleteStyle}
-                    onClick={this.handlePhotoDeleted}>
+                    onClick={() => {
+                        this.handlePhotoDeleted();
+                        this.props.handlePhotoDelete();
+                    }}>
                     <p>Удалить</p>
                 </Button>
             </div>

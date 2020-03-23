@@ -61,6 +61,12 @@ class CreateItem extends React.Component {
         });
     }
 
+    handlePhotoDelete(index) {
+        this.setState((state) => {
+            state.item.commonDtos[index].photoSrc = '';
+        });
+    }
+
     renderFrameOptions() {
         console.log('render');
         return this.state.item.commonDtos.map((elem, index) => {
@@ -76,6 +82,9 @@ class CreateItem extends React.Component {
                                 }}
                                 handlePhotoChange={(event) => {
                                     this.handlePhotoChange(event, index)
+                                }}
+                                handlePhotoDelete={() => {
+                                    this.handlePhotoDelete(index);
                                 }}
 
             />
