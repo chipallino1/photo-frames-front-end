@@ -3,6 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import {Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FrameOption from "./FrameOption";
+import {createItem} from "../../util/APIUtils";
+import Alert from "react-s-alert";
 
 class CreateItem extends React.Component {
 
@@ -10,15 +12,17 @@ class CreateItem extends React.Component {
         super(props);
         this.state = {
             item: {
+                userId: localStorage.getItem("userId"),
                 commonDtos: []
             }
         };
+        this.savePhotoFrame = this.savePhotoFrame.bind(this);
     }
 
     addFrameOption = () => {
         console.log(this.state.item);
         this.setState(
-            (state, props) => {
+            (state) => {
                 state.item.commonDtos.push({
                     cost: 0,
                     sizesDto: {},
@@ -27,6 +31,54 @@ class CreateItem extends React.Component {
                 return state;
             }
         )
+    }
+
+    handleNameChange = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState((state) => {
+            state.item.name = inputValue;
+        });
+    }
+
+    handleVendorCodeChange = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState((state) => {
+            state.item.vendorCode = inputValue;
+        });
+    }
+
+    handleBorderMaterialChange = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState((state) => {
+            state.item.borderMaterial = inputValue;
+        });
+    }
+
+    handleInsideMaterialChange = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState((state) => {
+            state.item.insideMaterial = inputValue;
+        });
+    }
+
+    handleTicknessChange = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState((state) => {
+            state.item.tickness = inputValue;
+        });
+    }
+
+    handleDescriptionChange = (event) => {
+        const target = event.target;
+        const inputValue = target.value;
+        this.setState((state) => {
+            state.item.description = inputValue;
+        });
     }
 
     handleCostChange(event, index) {
@@ -67,8 +119,18 @@ class CreateItem extends React.Component {
         });
     }
 
+    savePhotoFrame() {
+        console.log(this.state.item);
+        createItem(this.state.item)
+            .then(() => {
+                Alert.success("Рамка успешно создана");
+            })
+            .catch(() => {
+                Alert.success("Произошла ошибка");
+            })
+    }
+
     renderFrameOptions() {
-        console.log('render');
         return this.state.item.commonDtos.map((elem, index) => {
             return <FrameOption key={index}
                                 handleCostChange={(event) => {
@@ -102,25 +164,31 @@ class CreateItem extends React.Component {
                         <div className="col-lg">
                             <div className="w-50 mx-auto">
                                 <div className="row">
-                                    <TextField id="standard-basic" label="Имя" value={this.state.item.name}/>
+                                    <TextField id="standard-basic" label="Имя" value={this.state.item.name}
+                                               onChange={this.handleNameChange}/>
                                 </div>
                                 <div className="row">
-                                    <TextField id="standard-basic" label="Артикул" value={this.state.item.vendorCode}/>
+                                    <TextField id="standard-basic" label="Артикул" value={this.state.item.vendorCode}
+                                               onChange={this.handleVendorCodeChange}/>
                                 </div>
                                 <div className="row">
                                     <TextField id="standard-basic" label="Наружный материал"
-                                               value={this.state.item.borderMaterial}/>
+                                               value={this.state.item.borderMaterial}
+                                               onChange={this.handleBorderMaterialChange}/>
                                 </div>
                                 <div className="row">
                                     <TextField id="standard-basic" label="Внутренний материал"
-                                               value={this.state.item.insideMaterial}/>
+                                               value={this.state.item.insideMaterial}
+                                               onChange={this.handleInsideMaterialChange}/>
                                 </div>
                                 <div className="row">
-                                    <TextField id="standard-basic" label="Толщина" value={this.state.item.thickness}/>
+                                    <TextField id="standard-basic" label="Толщина" value={this.state.item.thickness}
+                                               onChange={this.handleTicknessChange}/>
                                 </div>
                                 <div className="row">
                                     <TextField id="standard-basic" label="Описание" multiline={true}
-                                               value={this.state.item.description}/>
+                                               value={this.state.item.description}
+                                               onChange={this.handleDescriptionChange}/>
                                 </div>
                             </div>
 
@@ -144,6 +212,7 @@ class CreateItem extends React.Component {
                                         component="label"
                                         color="primary"
                                         style={{marginTop: '5%', marginBottom: '5%'}}
+                                        onClick={this.savePhotoFrame}
                                     >
                                         Сохранить
                                     </Button>
