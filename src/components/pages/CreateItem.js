@@ -24,6 +24,7 @@ class CreateItem extends React.Component {
         this.setState(
             (state) => {
                 state.item.commonDtos.push({
+                    imageFile: {},
                     cost: 0,
                     sizesDto: {},
                     colorsDto: {}
@@ -107,15 +108,30 @@ class CreateItem extends React.Component {
 
     handlePhotoChange(event, index) {
         const target = event.target;
-        const inputValue = target.value;
         this.setState((state) => {
-            state.item.commonDtos[index].photoSrc = inputValue;
+            let fr = new FileReader();
+            fr.onloadend = (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onloadend = () => {
+                    const elem = document.createElement('canvas');
+                    elem.width = 500;
+                    elem.height = 300;
+                    const ctx = elem.getContext('2d');
+                    ctx.drawImage(img, 0, 0, 500, 300);
+                    const data = ctx.canvas.toDataURL(img, 1);
+                    state.item.commonDtos[index].imageFile = data;
+                    console.log(state.item.commonDtos[index].imageFile);
+                }
+            };
+            fr.readAsDataURL(target.files[0]);
         });
     }
 
+
     handlePhotoDelete(index) {
         this.setState((state) => {
-            state.item.commonDtos[index].photoSrc = '';
+            state.item.commonDtos[index].imageFile = null;
         });
     }
 

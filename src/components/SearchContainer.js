@@ -1,7 +1,9 @@
 import React from "react";
 import Item from "./Item";
 import {
+    getBorderMaterials,
     getColors,
+    getInsideMaterials,
     getItems,
     getItemsByColor,
     getItemsByPopularity,
@@ -27,7 +29,9 @@ class SearchContainer extends React.Component {
             currentFilter: '',
             items: [],
             colors: [],
-            sizes: []
+            sizes: [],
+            insideMaterials: [],
+            borderMaterials: []
         }
     }
 
@@ -46,7 +50,11 @@ class SearchContainer extends React.Component {
         getColors().then(response => {
             console.log(response);
             this.setState((state, props) => {
-                response.map(elem => (state.colors.push(elem)));
+                response.map(elem => {
+                    if (elem !== null) {
+                        state.colors.push(elem);
+                    }
+                });
                 return state;
             });
         })
@@ -56,7 +64,39 @@ class SearchContainer extends React.Component {
         getSizes().then(response => {
             console.log(response);
             this.setState((state, props) => {
-                response.map(elem => (state.sizes.push(elem)));
+                response.map(elem => {
+                    if (elem !== null) {
+                        state.sizes.push(elem);
+                    }
+                });
+                return state;
+            });
+        })
+    }
+
+    getAllInsideMaterials() {
+        getInsideMaterials().then(response => {
+            console.log(response);
+            this.setState((state, props) => {
+                response.map(elem => {
+                    if (elem !== null) {
+                        state.insideMaterials.push(elem);
+                    }
+                });
+                return state;
+            });
+        })
+    }
+
+    getAllBorderMaterials() {
+        getBorderMaterials().then(response => {
+            console.log(response);
+            this.setState((state, props) => {
+                response.map(elem => {
+                    if (elem !== null) {
+                        state.borderMaterials.push(elem);
+                    }
+                });
                 return state;
             });
         })
@@ -215,6 +255,8 @@ class SearchContainer extends React.Component {
     componentDidMount() {
         this.getAllColors();
         this.getAllSizes();
+        this.getAllBorderMaterials();
+        this.getAllInsideMaterials();
         this.currentSearchFunc = this.getItemsPage;
         this.currentSearchFunc(this.pageNum++);
     }
@@ -228,20 +270,57 @@ class SearchContainer extends React.Component {
 
     renderFilterColors() {
         return this.state.colors.map(elem => {
-            return <div className="radio">
-                <label><input type="radio" name="filter" value={elem} onChange={this.handleColorFilterChanged}/> {elem}
-                </label>
-            </div>
+            return <FormControlLabel
+                control={
+                    <Checkbox
+                        value="checkedB"
+                        color="primary"
+                    />
+                }
+                label={elem}
+            />
         });
     }
 
     renderFilterSizes() {
         return this.state.sizes.map(elem => {
-            return <div className="radio">
-                <label>
-                    <input type="radio" name="filter" value={elem} onChange={this.handleSizeFilterChanged}/> {elem}
-                </label>
-            </div>
+            return <FormControlLabel
+                control={
+                    <Checkbox
+                        value="checkedB"
+                        color="primary"
+                    />
+                }
+                label={elem}
+            />
+        });
+    }
+
+    renderFilterInsideMaterials() {
+        return this.state.insideMaterials.map(elem => {
+            return <FormControlLabel
+                control={
+                    <Checkbox
+                        value="checkedB"
+                        color="primary"
+                    />
+                }
+                label={elem}
+            />
+        });
+    }
+
+    renderFilterBorderMaterials() {
+        return this.state.borderMaterials.map(elem => {
+            return <FormControlLabel
+                control={
+                    <Checkbox
+                        value="checkedB"
+                        color="primary"
+                    />
+                }
+                label={elem}
+            />
         });
     }
 
@@ -253,43 +332,8 @@ class SearchContainer extends React.Component {
                         <div>
                             <h5>Цвета:</h5>
                             <div className="container marketing">
-                                {this.renderFilterSizes()}
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
+                                {this.renderFilterColors()}
+
                             </div>
                         </div>
                         <Divider/>
@@ -297,86 +341,21 @@ class SearchContainer extends React.Component {
                             <h5>Размеры: </h5>
                             <div className="container marketing">
                                 {this.renderFilterSizes()}
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
                             </div>
 
                         </div>
                         <Divider/>
                         <div>
-                            <h5>Материал: </h5>
+                            <h5>Наружный материал: </h5>
                             <div className="container marketing">
-                                {this.renderFilterSizes()}
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="checkedB"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="Primary"
-                                />
+                                {this.renderFilterBorderMaterials()}
+                            </div>
+                        </div>
+                        <Divider/>
+                        <div>
+                            <h5>Внутренний материал: </h5>
+                            <div className="container marketing">
+                                {this.renderFilterInsideMaterials()}
                             </div>
                         </div>
                     </div>
@@ -396,7 +375,7 @@ class SearchContainer extends React.Component {
                             <Item/>
                             <Item/>
                         </div>
-                            <Button onClick={() => (this.currentSearchFunc(this.pageNum++))}>More</Button>
+                        <Button onClick={() => (this.currentSearchFunc(this.pageNum++))}>More</Button>
 
                     </div>
                 </div>

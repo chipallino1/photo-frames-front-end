@@ -66,8 +66,8 @@ export function getItem(id) {
 
 export function getColors() {
     return request({
-       url: API_BASE_URL + "/colors/",
-       method: 'GET'
+        url: API_BASE_URL + "/colors/",
+        method: 'GET'
     });
 }
 
@@ -80,28 +80,28 @@ export function getSizes() {
 
 export function getItemsByColor(color, pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allByColor?color="+color+"&pageNumber="+pageNum+"&offset=1",
+        url: API_BASE_URL + "/photo-frames/allByColor?color=" + color + "&pageNumber=" + pageNum + "&offset=1",
         method: 'GET'
     });
 }
 
 export function getItemsBySize(size, pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allBySize?size="+size+"&pageNumber="+pageNum+"&offset=1",
+        url: API_BASE_URL + "/photo-frames/allBySize?size=" + size + "&pageNumber=" + pageNum + "&offset=1",
         method: 'GET'
     });
 }
 
 export function getItemsByPopularity(pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allByNameOrderPopular?name=&pageNumber="+pageNum+"&offset=1",
+        url: API_BASE_URL + "/photo-frames/allByNameOrderPopular?name=&pageNumber=" + pageNum + "&offset=1",
         method: 'GET'
     });
 }
 
 export function getItemsWithDiscounts(pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allWithDiscounts?name=&pageNumber="+pageNum+"&offset=1",
+        url: API_BASE_URL + "/photo-frames/allWithDiscounts?name=&pageNumber=" + pageNum + "&offset=1",
         method: 'GET'
     });
 }
@@ -156,5 +156,19 @@ export function sendEmailAboutNewOrder(dto) {
         url: API_BASE_URL + "/mail/sendOrderCreated",
         method: 'POST',
         body: JSON.stringify(dto)
+    })
+}
+
+export function getInsideMaterials() {
+    return request({
+        url: API_BASE_URL + "/photo-frames/insideMaterials",
+        method: 'GET'
+    })
+}
+
+export function getBorderMaterials() {
+    return request({
+        url: API_BASE_URL + "/photo-frames/borderMaterials",
+        method: 'GET'
     })
 }
