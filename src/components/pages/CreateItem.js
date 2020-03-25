@@ -4,7 +4,7 @@ import {Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import FrameOption from "./FrameOption";
 import {createItem} from "../../util/APIUtils";
-import Alert from "react-s-alert";
+import Alert from "react-bootstrap/Alert";
 
 class CreateItem extends React.Component {
 
@@ -14,7 +14,9 @@ class CreateItem extends React.Component {
             item: {
                 userId: localStorage.getItem("userId"),
                 commonDtos: []
-            }
+            },
+            successSave: false,
+            errorSave: false
         };
         this.savePhotoFrame = this.savePhotoFrame.bind(this);
     }
@@ -139,11 +141,43 @@ class CreateItem extends React.Component {
         console.log(this.state.item);
         createItem(this.state.item)
             .then(() => {
-                Alert.success("Рамка успешно создана");
+                console.log("success");
+                this.setState((state) => {
+                    state.successSave = true;
+                    return state;
+                });
+                this.resetFields();
+                setTimeout(() => {
+                    this.setState((state) => {
+                        state.successSave = false;
+                        return state;
+                    })
+                }, 1000);
             })
             .catch(() => {
-                Alert.success("Произошла ошибка");
+                console.log("error");
+                this.setState((state) => {
+                    state.errorSave = true;
+                    return state;
+                });
+                setTimeout(() => {
+                    this.setState((state) => {
+                        state.errorSave = false;
+                        return state;
+                    })
+                }, 1000);
             })
+    }
+
+    resetFields() {
+        this.setState((state) => {
+            state.item = {
+                userId: localStorage.getItem("userId"),
+                commonDtos: []
+            };
+            state.successSave = false;
+            state.errorSave = false
+        });
     }
 
     renderFrameOptions() {
@@ -169,11 +203,29 @@ class CreateItem extends React.Component {
         });
     }
 
+    renderSuccessSave() {
+        return this.state.successSave ? <Alert variant="success">
+            Успешно сохранено
+        </Alert> : null;
+    }
+
+    renderErrorSave() {
+        return this.state.errorSave ? <Alert variant="danger">
+            Произошла ошибка, проверьте правильность заполнения полей
+        </Alert> : null;
+    }
+
     render() {
         return (
             <div className="container marketing">
                 <div className="w-50 mx-auto">
                     <h5>Создание новой рамки</h5>
+                </div>
+                <div>
+                    {this.renderSuccessSave()}
+                </div>
+                <div>
+                    {this.renderErrorSave()}
                 </div>
                 <Paper>
                     <div className="row" style={{margin: '0.5%'}}>

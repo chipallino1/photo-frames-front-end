@@ -49,7 +49,7 @@ class SearchContainer extends React.Component {
     getAllColors() {
         getColors().then(response => {
             console.log(response);
-            this.setState((state, props) => {
+            this.setState((state) => {
                 response.map(elem => {
                     if (elem !== null) {
                         state.colors.push(elem);
@@ -63,7 +63,7 @@ class SearchContainer extends React.Component {
     getAllSizes() {
         getSizes().then(response => {
             console.log(response);
-            this.setState((state, props) => {
+            this.setState((state) => {
                 response.map(elem => {
                     if (elem !== null) {
                         state.sizes.push(elem);
@@ -77,7 +77,7 @@ class SearchContainer extends React.Component {
     getAllInsideMaterials() {
         getInsideMaterials().then(response => {
             console.log(response);
-            this.setState((state, props) => {
+            this.setState((state) => {
                 response.map(elem => {
                     if (elem !== null) {
                         state.insideMaterials.push(elem);
@@ -91,7 +91,7 @@ class SearchContainer extends React.Component {
     getAllBorderMaterials() {
         getBorderMaterials().then(response => {
             console.log(response);
-            this.setState((state, props) => {
+            this.setState((state) => {
                 response.map(elem => {
                     if (elem !== null) {
                         state.borderMaterials.push(elem);
