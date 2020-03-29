@@ -5,9 +5,9 @@ import {
     getColors,
     getInsideMaterials,
     getItems,
-    getItemsByColor,
+    getItemsByColors,
     getItemsByPopularity,
-    getItemsBySize,
+    getItemsBySizes,
     getItemsCost,
     getItemsCostDesc,
     getItemsWithDiscounts,
@@ -22,16 +22,42 @@ class SearchContainer extends React.Component {
 
     pageNum = 0;
     currentSearchFunc;
+    colorsFilterDto = {
+        filter: '',
+        filtersCount: 0
+    };
+    sizesFilterDto = {
+        filter: '',
+        filtersCount: 0
+    };
+    insideMaterialsFilterDto = {
+        filter: '',
+        filtersCount: 0
+    };
+    borderMaterialsFilterDto = {
+        filter: '',
+        filtersCount: 0
+    };
+
 
     constructor(props) {
         super(props);
         this.state = {
-            currentFilter: '',
             items: [],
             colors: [],
             sizes: [],
             insideMaterials: [],
-            borderMaterials: []
+            borderMaterials: [],
+            colorsFilter: '',
+            sizesFilter: '',
+            insideMaterialsFilter: '',
+            borderMaterialsFilter: '',
+            colorsFiltersCount: 0,
+            sizesFiltersCount: 0,
+            insideMaterialsFiltersCount: 0,
+            borderMaterialsFiltersCount: 0,
+
+            currentFilters: ''
         }
     }
 
@@ -39,7 +65,7 @@ class SearchContainer extends React.Component {
         getItems(pageNum)
             .then(response => {
                 console.log(response);
-                this.setState((state, props) => {
+                this.setState((state) => {
                     response.map(elem => (state.items.push(elem)));
                     return state;
                 });
@@ -102,25 +128,61 @@ class SearchContainer extends React.Component {
         })
     }
 
-    handleColorFilterChanged = (event) => {
+    handleColorsFilterChanged = (event) => {
         const target = event.target;
         const inputValue = target.value;
         this.pageNum = 0;
-        getItemsByColor(inputValue, this.pageNum++)
-            .then(r => {
-                console.log(this.state.items);
-                this.setState({
-                    currentFilter: inputValue,
-                    items: r
+        let isOnlyOneFilter = this.sizesFilterDto.filtersCount === 0
+            && this.insideMaterialsFilterDto.filtersCount === 0
+            && this.borderMaterialsFilterDto.filtersCount === 0;
+        if (!target.checked) {
+            this.uncheckedFilter(this.colorsFilterDto, inputValue, isOnlyOneFilter, getItemsByColors,
+                this.getItemsByColorsPage);
+            return;
+        }
+        this.checkedFilter(this.colorsFilterDto, inputValue, isOnlyOneFilter, getItemsByColors,
+            this.getItemsByColorsPage);
+
+    }
+
+    uncheckedFilter(filterDto, inputValue, isOnlyOneFilter, filterFun, pageFun) {
+        filterDto.filter = filterDto.filter.indexOf(',') > 0 ?
+            filterDto.filter.replace(',' + inputValue, '') : filterDto.filter.replace(inputValue, '');
+        filterDto.filtersCount--;
+
+        this.filterItems(filterDto, isOnlyOneFilter, filterFun, pageFun);
+    }
+
+    filterItems(filterDto, isOnlyOneFilter, filterFun, pageFun) {
+        if (filterDto.filtersCount > 0 && isOnlyOneFilter) {
+            filterFun(filterDto.filter, this.pageNum++)
+                .then(r => {
+                    this.setState({
+                        items: r
+                    });
+                    this.currentSearchFunc = pageFun;
                 });
-                console.log(this.state.items);
-                this.currentSearchFunc = this.getItemsByColorsPage;
-            });
+        } else if (filterDto.filtersCount === 0 && isOnlyOneFilter) {
+            this.getItemsPage(this.pageNum);
+        } else {
+            //todo get all by all params
+        }
+    }
+
+    checkedFilter(filterDto, inputValue, isOnlyOneFilter, filterFun, pageFun) {
+        if (filterDto.filter === '') {
+            filterDto.filter += inputValue;
+        } else {
+            filterDto.filter += (',' + inputValue);
+        }
+        filterDto.filtersCount++;
+        this.filterItems(filterDto, isOnlyOneFilter, filterFun, pageFun);
+
     }
 
     getItemsByColorsPage = (pageNum) => {
-        console.log(this.state.currentFilter);
-        getItemsByColor(this.state.currentFilter, pageNum)
+        console.log(this.state.colorsFilter);
+        getItemsByColors(this.state.colorsFilter, pageNum)
             .then(r => {
                 console.log(r);
                 this.setState((state, props) => {
@@ -134,7 +196,7 @@ class SearchContainer extends React.Component {
         const target = event.target;
         const inputValue = target.value;
         this.pageNum = 0;
-        getItemsBySize(inputValue, this.pageNum++)
+        getItemsBySizes(inputValue, this.pageNum++)
             .then(r => {
                 this.setState({
                     currentFilter: inputValue,
@@ -146,7 +208,7 @@ class SearchContainer extends React.Component {
 
     getItemsBySizesPage = (pageNum) => {
         console.log(this.state.currentFilter);
-        getItemsBySize(this.state.currentFilter, pageNum)
+        getItemsBySizes(this.state.currentFilter, pageNum)
             .then(r => {
                 console.log(r);
                 this.setState((state, props) => {
@@ -273,8 +335,9 @@ class SearchContainer extends React.Component {
             return <FormControlLabel
                 control={
                     <Checkbox
-                        value="checkedB"
+                        value={elem}
                         color="primary"
+                        onChange={this.handleColorsFilterChanged}
                     />
                 }
                 label={elem}
@@ -362,18 +425,6 @@ class SearchContainer extends React.Component {
                     <div className="col-lg-9">
                         <div className="row">
                             {this.renderList()}
-
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                            <Item/>
-                            <Item/>
                         </div>
                         <Button onClick={() => (this.currentSearchFunc(this.pageNum++))}>More</Button>
 

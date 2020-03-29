@@ -23,6 +23,8 @@ const request = (options) => {
         );
 };
 
+const PAGE_SIZE = 20;
+
 export function getCurrentUser() {
     if (!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
@@ -52,7 +54,7 @@ export function signup(signupRequest) {
 
 export function getItems(pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allByName?name=&pageNumber=" + pageNum + "&offset=1",
+        url: API_BASE_URL + "/photo-frames/allByName?name=&pageNumber=" + pageNum + "&offset=" + PAGE_SIZE,
         method: 'GET'
     });
 }
@@ -78,44 +80,44 @@ export function getSizes() {
     });
 }
 
-export function getItemsByColor(color, pageNum) {
+export function getItemsByColors(color, pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allByColor?color=" + color + "&pageNumber=" + pageNum + "&offset=1",
+        url: API_BASE_URL + "/photo-frames/allByColors?colors=" + color + "&pageNumber=" + pageNum + "&offset=" + PAGE_SIZE,
         method: 'GET'
     });
 }
 
-export function getItemsBySize(size, pageNum) {
+export function getItemsBySizes(size, pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allBySize?size=" + size + "&pageNumber=" + pageNum + "&offset=1",
+        url: API_BASE_URL + "/photo-frames/allBySizes?sizes=" + size + "&pageNumber=" + pageNum + "&offset=" + PAGE_SIZE,
         method: 'GET'
     });
 }
 
 export function getItemsByPopularity(pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allByNameOrderPopular?name=&pageNumber=" + pageNum + "&offset=1",
+        url: API_BASE_URL + "/photo-frames/allByNameOrderPopular?name=&pageNumber=" + pageNum + "&offset=" + PAGE_SIZE,
         method: 'GET'
     });
 }
 
 export function getItemsWithDiscounts(pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allWithDiscounts?name=&pageNumber=" + pageNum + "&offset=1",
+        url: API_BASE_URL + "/photo-frames/allWithDiscounts?name=&pageNumber=" + pageNum + "&offset=" + PAGE_SIZE,
         method: 'GET'
     });
 }
 
 export function getItemsCost(pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allOrderByCost?name=&pageNumber=" + pageNum + "&offset=1",
+        url: API_BASE_URL + "/photo-frames/allOrderByCost?name=&pageNumber=" + pageNum + "&offset=" + PAGE_SIZE,
         method: 'GET'
     });
 }
 
 export function getItemsCostDesc(pageNum) {
     return request({
-        url: API_BASE_URL + "/photo-frames/allOrderByCostDesc?name=&pageNumber=" + pageNum + "&offset=1",
+        url: API_BASE_URL + "/photo-frames/allOrderByCostDesc?name=&pageNumber=" + pageNum + "&offset=" + PAGE_SIZE,
         method: 'GET'
     });
 }
